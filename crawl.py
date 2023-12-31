@@ -15,9 +15,22 @@ import logging  # 미사용?
 # 다낭으로 향하는 4개 노선
 AIRWAYS = [
     ["ICN", "DAD"],
-    ["DAD", "ICN"],
-    ["PUS", "DAD"],
-    ["DAD", "PUS"],
+    # ["DAD", "ICN"],
+    # ["PUS", "DAD"],
+    # ["DAD", "PUS"],
+]
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Trident/7.0; AS; rv:11.0) like Gecko",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/91.0.864.37",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) OPR/77.0.4054.203",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 14_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Mobile/15E148 Safari/604.1",
+    "Mozilla/5.0 (Linux; Android 11; SM-G998U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Mobile Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 YaBrowser/21.6.2.855 Yowser/2.5 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
 ]
 
 
@@ -78,7 +91,9 @@ def parsingFromHtml(airway_ID, flightDate, parsedHtml_li):
 
 # airway와 비행날짜 전체의 항공권 데이터를 조사하는 함수
 def searchWithAirwayAndFlightDate(airway_ID, flightDate):
-    global browser
+    global idx
+    global currBrowser
+    global browserList
 
     departureAirport = AIRWAYS[airway_ID][0]
     arriveAirport = AIRWAYS[airway_ID][1]
@@ -94,7 +109,7 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
     )
     # WebDriver에 Get요청 실패시 예외처리
     try:
-        browser.get(url)
+        currBrowser.get(url)
     except:
         print("[ERROR] getUrl failed at ", departureAirport, arriveAirport, flightDate)
         raise Exception("browser.get(url) Failed")
@@ -102,7 +117,7 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
     # WebDriver를 이용한 비동기 html 로딩
     try:
         # 30초 이내 비동기 로딩 실패시 예외처리
-        element = WebDriverWait(browser, 30).until(
+        element = WebDriverWait(currBrowser, 30).until(
             EC.presence_of_element_located(
                 (
                     By.CLASS_NAME,
@@ -112,20 +127,24 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
         )
 
         # 카드혜택 필터 제거
-        cardFilterElem = browser.find_element(By.CLASS_NAME, "header_sort__1UG7V")
+        cardFilterElem = currBrowser.find_element(By.CLASS_NAME, "header_sort__1UG7V")
         cardFilterElem.click()
 
-        cardUnSelectedElem = browser.find_element(By.CLASS_NAME, "header_option__2G14z")
+        cardUnSelectedElem = currBrowser.find_element(
+            By.CLASS_NAME, "header_option__2G14z"
+        )
         cardUnSelectedElem.click()
 
     except:
         # webDriver 멈춤으로 인한 timeout
         print("[ERROR] 30s timeout at ", departureAirport, arriveAirport, flightDate)
-
+        idx = (idx + 1) % 4
+        currBrowser = browserList[idx]
+        time.sleep(60)
         return list([])  # 재검색????
 
     # bs4를 이용한 html parsing
-    parsedHtml_li = BeautifulSoup(browser.page_source, "html.parser").find_all(
+    parsedHtml_li = BeautifulSoup(currBrowser.page_source, "html.parser").find_all(
         "div", class_="indivisual_IndivisualItem__3co62 result"
     )
     return parsingFromHtml(airway_ID, flightDate, parsedHtml_li)
@@ -136,20 +155,78 @@ def main():
     global datas_li
     global startTime
 
-    global browser
+    global idx
+    global currBrowser
+    global browserList
 
     totalFlightsCount = 0
     datas_li = []
 
-    options = webdriver.ChromeOptions()
-    options.add_argument("headless")
-    browser = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행S
-
     # 노선의 ID
     for airway_ID in range(4):
+        options = webdriver.ChromeOptions()
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.add_argument("user-agent=" + USER_AGENTS[0])
+        options.add_argument("--disable-web-security")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--log-level=1")
+        options.add_argument("headless")
+        browser0 = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
+        browser1 = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
+        browser2 = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
+        browser3 = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
+        browserList = [browser0, browser1, browser2, browser3]
+        idx = 0
+        currBrowser = browserList[idx]
+
+        currBrowser.execute_cdp_cmd("Network.enable", {})
+        currBrowser.execute_cdp_cmd(
+            "Network.setExtraHTTPHeaders",
+            {"headers": {"User-Agent": USER_AGENTS[0]}},
+        )
         time.sleep(3)  # 브라우저 열고 잠깐 기다림
 
         for days in range(3, 181):  # 3일뒤 항공편부터 존재(해외) 6개월까지
+            if days % 19 == 0:
+                print("WebDriver Reload..")
+                browser0.quit()
+                browser1.quit()
+                browser2.quit()
+                browser3.quit()
+                time.sleep(3)
+
+                options = webdriver.ChromeOptions()
+                options.add_argument("--disable-blink-features=AutomationControlled")
+                options.add_argument("user-agent=" + USER_AGENTS[int(days // 19)])
+
+                options.add_argument("--disable-web-security")
+                options.add_argument("--disable-gpu")
+                options.add_argument("--log-level=1")
+                options.add_argument("headless")
+                browser0 = webdriver.Chrome(
+                    "chromedriver.exe", options=options
+                )  # 브라우저 실행
+                browser1 = webdriver.Chrome(
+                    "chromedriver.exe", options=options
+                )  # 브라우저 실행
+                browser2 = webdriver.Chrome(
+                    "chromedriver.exe", options=options
+                )  # 브라우저 실행
+                browser3 = webdriver.Chrome(
+                    "chromedriver.exe", options=options
+                )  # 브라우저 실행
+                browserList = [browser0, browser1, browser2, browser3]
+                idx = 0
+                currBrowser = browserList[idx]
+                time.sleep(3)
+
+                currBrowser.execute_cdp_cmd("Network.enable", {})
+                currBrowser.execute_cdp_cmd(
+                    "Network.setExtraHTTPHeaders",
+                    {"headers": {"User-Agent": USER_AGENTS[int(days // 19)]}},
+                )
+                time.sleep(2)
+
             departureAirPort = AIRWAYS[airway_ID][0]
             arriveAirPort = AIRWAYS[airway_ID][1]
             filghtDate = (startTime + timedelta(days=days)).strftime("%Y%m%d")
@@ -171,8 +248,11 @@ def main():
             f">> {departureAirPort} to {arriveAirPort} flights : {len(parsedDatas_li)}  --TOTAL FLIGHTS : {len(datas_li)}"
         )
         print("----------------changing airway----------------------\n")
-
-    browser.quit()
+        # 브라우저 리셋 - 끄기
+        browser0.quit()
+        browser1.quit()
+        browser2.quit()
+        browser3.quit()
 
     # Flight Ticket ID,  후처리
     for i in range(len(datas_li)):
