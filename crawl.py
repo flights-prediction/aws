@@ -8,14 +8,11 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import time
 
-import asyncio  # 외부
-import logging  # 미사용?
-
 
 # 다낭으로 향하는 4개 노선
 AIRWAYS = [
     ["ICN", "DAD"],
-    # ["DAD", "ICN"],
+    ["DAD", "ICN"],
     # ["PUS", "DAD"],
     # ["DAD", "PUS"],
 ]
@@ -91,9 +88,7 @@ def parsingFromHtml(airway_ID, flightDate, parsedHtml_li):
 
 # airway와 비행날짜 전체의 항공권 데이터를 조사하는 함수
 def searchWithAirwayAndFlightDate(airway_ID, flightDate):
-    global idx
-    global currBrowser
-    global browserList
+    global browser
 
     departureAirport = AIRWAYS[airway_ID][0]
     arriveAirport = AIRWAYS[airway_ID][1]
@@ -109,7 +104,7 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
     )
     # WebDriver에 Get요청 실패시 예외처리
     try:
-        currBrowser.get(url)
+        browser.get(url)
     except:
         print("[ERROR] getUrl failed at ", departureAirport, arriveAirport, flightDate)
         raise Exception("browser.get(url) Failed")
@@ -117,34 +112,41 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
     # WebDriver를 이용한 비동기 html 로딩
     try:
         # 30초 이내 비동기 로딩 실패시 예외처리
-        element = WebDriverWait(currBrowser, 30).until(
+        element = WebDriverWait(browser, 30).until(
             EC.presence_of_element_located(
                 (
                     By.CLASS_NAME,
-                    "priceGraph_summary__24ALd",
+                    "flights.List.international_InternationalContainer__2sPtn",
                 )
+            )
+        )
+        time.sleep(1)
+        # 30초 이내 로딩완료 실패시 예외처리
+        element_to_disappear = WebDriverWait(browser, 30).until(
+            EC.invisibility_of_element_located(
+                (By.CLASS_NAME, "loadingProgress_loadingProgress__1LRJo")
             )
         )
 
         # 카드혜택 필터 제거
-        cardFilterElem = currBrowser.find_element(By.CLASS_NAME, "header_sort__1UG7V")
-        cardFilterElem.click()
-
-        cardUnSelectedElem = currBrowser.find_element(
+        cardFilterElems = browser.find_elements(By.CLASS_NAME, "header_current__3asvR")
+        cardFilterElems[1].click()
+        time.sleep(1)
+        cardFilterSelectOptions = browser.find_elements(
             By.CLASS_NAME, "header_option__2G14z"
         )
-        cardUnSelectedElem.click()
+        cardFilterSelectOptions[1].click()
 
-    except:
+        time.sleep(3)
+    except Exception as e:
         # webDriver 멈춤으로 인한 timeout
         print("[ERROR] 30s timeout at ", departureAirport, arriveAirport, flightDate)
-        idx = (idx + 1) % 4
-        currBrowser = browserList[idx]
-        time.sleep(60)
-        return list([])  # 재검색????
+        print(e)
+        time.sleep(30)
+        # searchWithAirwayAndFlightDate(airway_ID, flightDate)
 
     # bs4를 이용한 html parsing
-    parsedHtml_li = BeautifulSoup(currBrowser.page_source, "html.parser").find_all(
+    parsedHtml_li = BeautifulSoup(browser.page_source, "html.parser").find_all(
         "div", class_="indivisual_IndivisualItem__3co62 result"
     )
     return parsingFromHtml(airway_ID, flightDate, parsedHtml_li)
@@ -155,32 +157,24 @@ def main():
     global datas_li
     global startTime
 
-    global idx
-    global currBrowser
-    global browserList
+    global browser
 
     totalFlightsCount = 0
     datas_li = []
 
     # 노선의 ID
-    for airway_ID in range(4):
+    for airway_ID in range(2):
         options = webdriver.ChromeOptions()
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("user-agent=" + USER_AGENTS[0])
         options.add_argument("--disable-web-security")
         options.add_argument("--disable-gpu")
         options.add_argument("--log-level=1")
+        options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
         options.add_argument("headless")
-        browser0 = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
-        browser1 = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
-        browser2 = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
-        browser3 = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
-        browserList = [browser0, browser1, browser2, browser3]
-        idx = 0
-        currBrowser = browserList[idx]
-
-        currBrowser.execute_cdp_cmd("Network.enable", {})
-        currBrowser.execute_cdp_cmd(
+        browser = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
+        browser.execute_cdp_cmd("Network.enable", {})
+        browser.execute_cdp_cmd(
             "Network.setExtraHTTPHeaders",
             {"headers": {"User-Agent": USER_AGENTS[0]}},
         )
@@ -189,39 +183,23 @@ def main():
         for days in range(3, 181):  # 3일뒤 항공편부터 존재(해외) 6개월까지
             if days % 19 == 0:
                 print("WebDriver Reload..")
-                browser0.quit()
-                browser1.quit()
-                browser2.quit()
-                browser3.quit()
+                browser.quit()
                 time.sleep(3)
 
                 options = webdriver.ChromeOptions()
                 options.add_argument("--disable-blink-features=AutomationControlled")
                 options.add_argument("user-agent=" + USER_AGENTS[int(days // 19)])
-
                 options.add_argument("--disable-web-security")
                 options.add_argument("--disable-gpu")
                 options.add_argument("--log-level=1")
+                options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
                 options.add_argument("headless")
-                browser0 = webdriver.Chrome(
-                    "chromedriver.exe", options=options
-                )  # 브라우저 실행
-                browser1 = webdriver.Chrome(
-                    "chromedriver.exe", options=options
-                )  # 브라우저 실행
-                browser2 = webdriver.Chrome(
-                    "chromedriver.exe", options=options
-                )  # 브라우저 실행
-                browser3 = webdriver.Chrome(
-                    "chromedriver.exe", options=options
-                )  # 브라우저 실행
-                browserList = [browser0, browser1, browser2, browser3]
-                idx = 0
-                currBrowser = browserList[idx]
+                browser = webdriver.Chrome("chromedriver.exe", options=options)
+
                 time.sleep(3)
 
-                currBrowser.execute_cdp_cmd("Network.enable", {})
-                currBrowser.execute_cdp_cmd(
+                browser.execute_cdp_cmd("Network.enable", {})
+                browser.execute_cdp_cmd(
                     "Network.setExtraHTTPHeaders",
                     {"headers": {"User-Agent": USER_AGENTS[int(days // 19)]}},
                 )
@@ -249,10 +227,7 @@ def main():
         )
         print("----------------changing airway----------------------\n")
         # 브라우저 리셋 - 끄기
-        browser0.quit()
-        browser1.quit()
-        browser2.quit()
-        browser3.quit()
+        browser.quit()
 
     # Flight Ticket ID,  후처리
     for i in range(len(datas_li)):
