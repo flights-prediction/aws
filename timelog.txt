@@ -43,8 +43,3 @@
 [Running Time] : 0:00:34.016503 (ms)
 [File Length] 4 airways, 61 rows 
 
-[Start Time] 2023-12-31 23:34:19.991244
-[End Time] 2023-12-31 23:48:46.567830
-[Running Time] : 0:14:26.576586 (ms)
-[File Length] 4 airways, 1878 rows 
-
