@@ -1,0 +1,45 @@
+[Start Time] 2023-12-31 17:35:08.098968
+[End Time] 2023-12-31 17:36:11.074498
+[Running Time] : 0:01:02.975530 (ms)
+[File Length] 4 airways, 124 rows 
+
+[Start Time] 2023-12-31 17:36:42.925665
+[End Time] 2023-12-31 17:37:42.356524
+[Running Time] : 0:00:59.430859 (ms)
+[File Length] 4 airways, 124 rows 
+
+[Start Time] 2023-12-31 17:38:02.368878
+[End Time] 2023-12-31 17:39:06.626570
+[Running Time] : 0:01:04.257692 (ms)
+[File Length] 4 airways, 124 rows 
+
+[Start Time] 2023-12-31 17:41:48.959470
+[End Time] 2023-12-31 17:43:00.888370
+[Running Time] : 0:01:11.928900 (ms)
+[File Length] 4 airways, 122 rows 
+
+[Start Time] 2023-12-31 17:48:59.177148
+[End Time] 2023-12-31 17:49:45.000383
+[Running Time] : 0:00:45.823235 (ms)
+[File Length] 4 airways, 61 rows 
+
+[Start Time] 2023-12-31 17:51:53.912833
+[End Time] 2023-12-31 17:52:54.302415
+[Running Time] : 0:01:00.389582 (ms)
+[File Length] 4 airways, 56 rows 
+
+[Start Time] 2023-12-31 17:53:10.525460
+[End Time] 2023-12-31 17:53:49.313467
+[Running Time] : 0:00:38.788007 (ms)
+[File Length] 4 airways, 58 rows 
+
+[Start Time] 2023-12-31 17:55:19.308102
+[End Time] 2023-12-31 17:56:00.811441
+[Running Time] : 0:00:41.503339 (ms)
+[File Length] 4 airways, 61 rows 
+
+[Start Time] 2023-12-31 17:56:33.437599
+[End Time] 2023-12-31 17:57:07.454102
+[Running Time] : 0:00:34.016503 (ms)
+[File Length] 4 airways, 61 rows 
+

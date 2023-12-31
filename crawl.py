@@ -51,7 +51,7 @@ def parsingFromHtml(airway_ID, flightDate, parsedHtml_li):
                     "Flight Time",
                     "Airline",
                     "Price",
-                    "Card Benefit",
+
                 ]
             )
             """
@@ -143,13 +143,13 @@ def main():
 
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
-    browser = webdriver.Chrome("chromedriver.exe")  # 브라우저 실행S
+    browser = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행S
 
     # 노선의 ID
     for airway_ID in range(4):
         time.sleep(3)  # 브라우저 열고 잠깐 기다림
 
-        for days in range(3, 5):  # 3일뒤 항공편부터 존재(해외) 6개월까지
+        for days in range(3, 181):  # 3일뒤 항공편부터 존재(해외) 6개월까지
             departureAirPort = AIRWAYS[airway_ID][0]
             arriveAirPort = AIRWAYS[airway_ID][1]
             filghtDate = (startTime + timedelta(days=days)).strftime("%Y%m%d")
@@ -199,12 +199,9 @@ print(f"[End Time] {endTime}\n")
 print(f"[Running Time] : { endTime - startTime} (ms)\n")
 print(f"[File Length] 4 airways, {len(datas_li)} rows \n\n")
 
-exit(0)
 
-# csv 출력
-fd = open(
-    f"crawledFiles/{todayFileNameFormatting}.csv", "w", encoding="utf-8", newline=""
-)
+# csv 생성
+fd = open(f"data/{todayFileNameFormatting}.csv", "w", encoding="utf-8", newline="")
 csvWriter = csv.writer(fd)
 for li in datas_li:
     csvWriter.writerow(li)
@@ -213,21 +210,20 @@ print("[INFO]   ", todayFileNameFormatting, ".csv generated")
 
 
 # log 출력
-log_fd = open("crawledFiles/timelog.txt", "a", newline="")
+log_fd = open("timelog.txt", "a", newline="")
 log_fd.write(f"[Start Time] {startTime}\n")
 log_fd.write(f"[End Time] {endTime}\n")
 log_fd.write(f"[Running Time] : { endTime - startTime} (ms)\n")
-log_fd.write(f"[File Length] {countingURL} url, {len(datas_li)} rows \n\n")
+log_fd.write(f"[File Length] 4 airways, {len(datas_li)} rows \n\n")
 log_fd.close()
 
 print("[LOGGED] timelog.txt generated")
 
 
 # 기존 csv에 추가
-
-fd2 = open("crawledFiles/flights.csv", "r", encoding="UTF-8")  # 마지막인덱스찾기
+fd2 = open("data/flights.csv", "r", encoding="UTF-8")  # 마지막인덱스찾기
 csvReader = csv.reader(fd2)
-lastIdx = 1
+lastIdx = 0
 for i in csvReader:
     lastIdx = i[0]
 lastIdx = int(lastIdx)
@@ -236,7 +232,7 @@ fd2.close()
 for i in range(len(datas_li)):
     datas_li[i][0] = i + lastIdx + 1
 
-fd3 = open("crawledFiles/flights.csv", "a", encoding="utf-8", newline="")
+fd3 = open("data/flights.csv", "a", encoding="utf-8", newline="")
 csvWriter = csv.writer(fd3)
 for li in datas_li:
     csvWriter.writerow(li)
