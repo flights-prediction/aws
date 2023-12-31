@@ -21,30 +21,29 @@ AIRWAYS = [
 ]
 
 
-def parsingFromHtml(airway_ID, flightDate, crawledHtml_li):
-    # 로딩이 끝나면 생기는 비동기 elem : div.flights List domestic_DomesticFlight__3wvCd
-    # 요소의 className -> CSS선택자로 추출
-    # 전체 : div.indivisual_IndivisualItem__3co62 result
-    # 항공사 : b.name -> CSS
-    # 출발시간/도착시간 : route_time__-2Z1T[2]
-    # 소요시간 : route_info__1RhUH 의 2번째 텍스트
-    # 카드 혜택 : item_type__2KJOZ
-    # 가격 : item_num__3R0Vz
-    parsed_li = []
-    for elem in crawledHtml_li:
+# html parser로 파싱한 데이터에서 정보 추출하는 함수
+# 로딩이 끝나면 생기는 비동기 elem : priceGraph_summary__24ALd
+# 요소의 className과 element 태그 이름을 CSS선택자로 추출
+# 각 정보의 최상위 DOM element : div.indivisual_IndivisualItem__3co62 result
+# 항공사이름 : <b class = "airline_name__Tm2wJ">
+# 출발시간/도착시간 :  <b class = "route_time__-2Z1T"> x2
+# 소요시간 : <i class = "route_info__1RhUH">의 2번째 텍스트
+# 가격 : <i class = "item_num__3R0Vz">의 텍스트
+def parsingFromHtml(airway_ID, flightDate, parsedHtml_li):
+    parsedData_li = []
+    for elem in parsedHtml_li:
         try:
             airline = elem.find("b", class_="airline_name__Tm2wJ").get_text()
             departureAndArriveTimes = elem.find_all("b", class_="route_time__-2Z1T")
             departureTime = departureAndArriveTimes[0].get_text()
             arriveTime = departureAndArriveTimes[1].get_text()
             flightTime = elem.find("i", class_="route_info__1RhUH").get_text()
-            # card_benefit = elem.find("span", class_="item_type__2KJOZ").get_text()
             price = elem.find("i", class_="item_num__3R0Vz").get_text()
             """
             datas_li.append(
                 [
                     "Flight Ticket ID",  # idx 후처리
-                    "Searching Date",  # 조사날짜 후처 리 
+                    "Searching Date", 
                     "Departure Date",
                     "Airway ID",
                     "Depature Time",
@@ -57,8 +56,8 @@ def parsingFromHtml(airway_ID, flightDate, crawledHtml_li):
             )
             """
             li = [
-                1,
-                1,
+                -1,  # 항공권 가격 정보 index는 후처리!
+                searchingDate,
                 flightDate[0:4] + "-" + flightDate[4:6] + "-" + flightDate[6:8],
                 airway_ID,
                 departureTime,
@@ -66,26 +65,24 @@ def parsingFromHtml(airway_ID, flightDate, crawledHtml_li):
                 flightTime[4:6] + ":" + flightTime[9:11],  # 소요시간 슬라이싱
                 airline,
                 int(price.replace(",", "")),
-                # card_benefit[3:],
             ]
-            parsed_li.append(li)
+            parsedData_li.append(li)
 
         # 요소에 데이터가 없는경우 패스
         except Exception as e:
             print(e)
             pass
 
-    return parsed_li
+    return parsedData_li
 
 
+# airway와 비행날짜 전체의 항공권 데이터를 조사하는 함수
 def searchWithAirwayAndFlightDate(airway_ID, flightDate):
-    global countingURL
     global browser
 
     departureAirport = AIRWAYS[airway_ID][0]
     arriveAirport = AIRWAYS[airway_ID][1]
 
-    countingURL += 1
     url = (
         "https://m-flight.naver.com/flights/international/"
         + departureAirport
@@ -104,8 +101,8 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
 
     # WebDriver를 이용한 비동기 html 로딩
     try:
-        # 15초 이내 비동기 로딩 실패시 예외처리
-        element = WebDriverWait(browser, 20).until(
+        # 30초 이내 비동기 로딩 실패시 예외처리
+        element = WebDriverWait(browser, 30).until(
             EC.presence_of_element_located(
                 (
                     By.CLASS_NAME,
@@ -113,32 +110,35 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
                 )
             )
         )
+
+        # 카드혜택 필터 제거
+        cardFilterElem = browser.find_element(By.CLASS_NAME, "header_sort__1UG7V")
+        cardFilterElem.click()
+
+        cardUnSelectedElem = browser.find_element(By.CLASS_NAME, "header_option__2G14z")
+        cardUnSelectedElem.click()
+
     except:
         # webDriver 멈춤으로 인한 timeout
-        print("[ERROR] 20s timeout at ", departure, arrive, date)
-        print("[SYS] switching chrome browser to idx : ", idx)
+        print("[ERROR] 30s timeout at ", departureAirport, arriveAirport, flightDate)
 
-        return list([])  # 재검색
+        return list([])  # 재검색????
 
-    # bs4를 이용한 parsing
-
-    soup = BeautifulSoup(browser.page_source, "html.parser")
-    crawledHtml_li = soup.find_all(
+    # bs4를 이용한 html parsing
+    parsedHtml_li = BeautifulSoup(browser.page_source, "html.parser").find_all(
         "div", class_="indivisual_IndivisualItem__3co62 result"
     )
-    parsedHtml_li = parsingFromHtml(airway_ID, flightDate, crawledHtml_li)  # bs4
-
-    return parsedHtml_li
+    return parsingFromHtml(airway_ID, flightDate, parsedHtml_li)
 
 
 def main():
-    global countingURL
+    global totalFlightsCount
     global datas_li
     global startTime
 
     global browser
 
-    countingURL = 0
+    totalFlightsCount = 0
     datas_li = []
 
     options = webdriver.ChromeOptions()
@@ -147,45 +147,46 @@ def main():
 
     # 노선의 ID
     for airway_ID in range(4):
-        routeTotalFlights = 0
-
         time.sleep(3)  # 브라우저 열고 잠깐 기다림
 
         for days in range(3, 5):  # 3일뒤 항공편부터 존재(해외) 6개월까지
-            # 90번마다 브라우저 리셋?
-
             departureAirPort = AIRWAYS[airway_ID][0]
             arriveAirPort = AIRWAYS[airway_ID][1]
             filghtDate = (startTime + timedelta(days=days)).strftime("%Y%m%d")
 
             # 해당 날짜 항공편 수집 소요 시간 검사
             before_crawl_time = datetime.today() + timedelta(hours=9)
-            parsed_li = searchWithAirwayAndFlightDate(airway_ID, filghtDate)
+            parsedDatas_li = searchWithAirwayAndFlightDate(airway_ID, filghtDate)
             after_crawl_time = datetime.today() + timedelta(hours=9)
 
             crawl_time = after_crawl_time - before_crawl_time
             print(
-                f"{airway_ID}-at {days} days later,       {departureAirPort} to {arriveAirPort} at {filghtDate} have {len(parsed_li)} flights. Running Time : {crawl_time}(ms)"
+                f"{airway_ID}th airway about {days} days later, {departureAirPort} to {arriveAirPort} at {filghtDate} have {len(parsedDatas_li)} flights. Running Time : {crawl_time}(ms)"
             )
 
-            routeTotalFlights += len(parsed_li)
+            totalFlightsCount += len(parsedDatas_li)
 
-            datas_li += parsed_li
+            datas_li += parsedDatas_li
         print(
-            f">> {departureAirPort} to {arriveAirPort} flights : {routeTotalFlights}  --TOTAL FLIGHTS : {len(datas_li)}"
+            f">> {departureAirPort} to {arriveAirPort} flights : {len(parsedDatas_li)}  --TOTAL FLIGHTS : {len(datas_li)}"
         )
         print("----------------changing airway----------------------\n")
 
     browser.quit()
 
-    # Flight Ticket ID, searchingDate 후처리
+    # Flight Ticket ID,  후처리
     for i in range(len(datas_li)):
         datas_li[i][0] = i
-        datas_li[i][1] = startTime.strftime("%Y-%m-%d")
+
+    for data in datas_li:
+        print(data)
 
 
 # Running Time Check - Start
 startTime = datetime.today() + timedelta(hours=0)
+
+# 전역변수
+searchingDate = startTime.strftime("%Y-%m-%d")
 
 todayFileNameFormatting = startTime.strftime("%Y%m%d_%H%M%S")
 print("today : ", todayFileNameFormatting)
@@ -196,7 +197,7 @@ endTime = datetime.today() + timedelta(hours=0)
 print(f"[Start Time] {startTime}\n")
 print(f"[End Time] {endTime}\n")
 print(f"[Running Time] : { endTime - startTime} (ms)\n")
-print(f"[File Length] {countingURL} url, {len(datas_li)} rows \n\n")
+print(f"[File Length] 4 airways, {len(datas_li)} rows \n\n")
 
 exit(0)
 
