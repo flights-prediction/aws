@@ -192,7 +192,7 @@ def main():
                 options.add_argument("--disable-web-security")
                 options.add_argument("--disable-gpu")
                 options.add_argument("--log-level=1")
-                options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
+                options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩  제거 
                 options.add_argument("headless")
                 browser = webdriver.Chrome("chromedriver.exe", options=options)
 
