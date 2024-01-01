@@ -1,0 +1,5 @@
+[Start Time] 2024-01-01 09:13:15.365653
+[End Time] 2024-01-01 10:33:42.580732
+[Running Time] : 1:20:27.215079 (ms)
+[File Length] 4 airways, 5471 rows 
+
