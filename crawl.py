@@ -192,7 +192,7 @@ def main():
                 options.add_argument("--disable-web-security")
                 options.add_argument("--disable-gpu")
                 options.add_argument("--log-level=1")
-                options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩  제거 
+                options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제
                 options.add_argument("headless")
                 browser = webdriver.Chrome("chromedriver.exe", options=options)
 
@@ -207,7 +207,7 @@ def main():
 
             departureAirPort = AIRWAYS[airway_ID][0]
             arriveAirPort = AIRWAYS[airway_ID][1]
-            filghtDate = (startTime + timedelta(days=days)).strftime("%Y%m%d")
+            filghtDate = (startTime + timedelta(days=days)).strftime("%Y%m%d")   
 
             # 해당 날짜 항공편 수집 소요 시간 검사
             before_crawl_time = datetime.today() + timedelta(hours=9)
