@@ -233,8 +233,7 @@ def main():
     for i in range(len(datas_li)):
         datas_li[i][0] = i
 
-    for data in datas_li:
-        print(data)
+   
 
 
 # Running Time Check - Start
