@@ -251,7 +251,7 @@ endTime = datetime.today() + timedelta(hours=0)
 print(f"[Start Time] {startTime}\n")
 print(f"[End Time] {endTime}\n")
 print(f"[Running Time] : { endTime - startTime} (ms)\n")
-print(f"[File Length] 4 airways, {len(datas_li)} rows \n\n")
+print(f"[File Length] 2 airways, {len(datas_li)} rows \n\n")
 
 
 # csv 생성

@@ -13,3 +13,8 @@
 [Running Time] : 1:23:17.906378 (ms)
 [File Length] 4 airways, 5395 rows 
 
+[Start Time] 2024-01-04 00:34:09.482474
+[End Time] 2024-01-04 02:00:47.260339
+[Running Time] : 1:26:37.777865 (ms)
+[File Length] 4 airways, 5372 rows 
+
