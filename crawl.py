@@ -275,7 +275,7 @@ print("[LOGGED] timelog.txt generated")
 
 
 # 기존 csv에 누적
-fd2 = open("data/flights.csv", "r", encoding="UTF-8")  # 마지막인덱스찾기
+fd2 = open("data/flights.csv", "r", encoding="UTF-8")  # 마지막인덱스 조절
 csvReader = csv.reader(fd2)
 lastIdx = 0
 for i in csvReader:
