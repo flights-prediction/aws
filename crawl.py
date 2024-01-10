@@ -268,14 +268,14 @@ log_fd = open("timelog.txt", "a", newline="")
 log_fd.write(f"[Start Time] {startTime}\n")
 log_fd.write(f"[End Time] {endTime}\n")
 log_fd.write(f"[Running Time] : { endTime - startTime} (ms)\n")
-log_fd.write(f"[File Length] 2 airways, {len(datas_li)} rows \n\n")
+log_fd.write(f"[File Length] 2 airways, {len(datas_li) } rows \n\n")
 log_fd.close()
 
 print("[LOGGED] timelog.txt generated")
 
 
-# 기존 csv에 누적
-fd2 = open("data/flights.csv", "r", encoding="UTF-8")  # 마지막인덱스 조절
+# 기존 csv에 누적.
+fd2 = open("data/flights.csv", "r", encoding="UTF-8")  # 마지막인덱스
 csvReader = csv.reader(fd2)
 lastIdx = 0
 for i in csvReader:
