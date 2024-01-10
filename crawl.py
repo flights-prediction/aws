@@ -128,7 +128,7 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
             )
         )
 
-        # 카드혜택 필터 제거
+        # 카드혜택 필터 제거.
         cardFilterElems = browser.find_elements(By.CLASS_NAME, "header_current__3asvR")
         cardFilterElems[1].click()
         time.sleep(1)
