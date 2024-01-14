@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 import time
 
 
-# 다낭으로 향하는 4개 노선
+# 다낭으로 향하는 2개 노선
 AIRWAYS = [
     ["ICN", "DAD"],
     ["DAD", "ICN"],

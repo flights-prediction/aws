@@ -48,3 +48,13 @@
 [Running Time] : 1:32:59.160356 (ms)
 [File Length] 2 airways, 5613 rows 
 
+[Start Time] 2024-01-11 00:12:51.049024
+[End Time] 2024-01-11 01:37:11.089587
+[Running Time] : 1:24:20.040563 (ms)
+[File Length] 2 airways, 5823 rows 
+
+[Start Time] 2024-01-12 00:10:02.103872
+[End Time] 2024-01-12 01:36:47.735021
+[Running Time] : 1:26:45.631149 (ms)
+[File Length] 2 airways, 5764 rows 
+
