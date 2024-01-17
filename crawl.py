@@ -173,8 +173,9 @@ def main():
         options.add_argument("--disable-gpu")
         options.add_argument("--log-level=1")
         options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
-        options.add_argument("headless")
-        browser = webdriver.Chrome("chromedriver.exe", options=options)  # 브라우저 실행
+        options.add_argument("--headless")
+        options.add_argument("webdriver.chrome.driver=chromedriver.exe") # seleniun 4.10애서 바뀐 execute path
+        browser = webdriver.Chrome(options=options)  # seleniun 4.10애서 바뀐 execute path
         browser.execute_cdp_cmd("Network.enable", {})
         browser.execute_cdp_cmd(
             "Network.setExtraHTTPHeaders",
@@ -195,8 +196,9 @@ def main():
                 options.add_argument("--disable-gpu")
                 options.add_argument("--log-level=1")
                 options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제
-                options.add_argument("headless")
-                browser = webdriver.Chrome("chromedriver.exe", options=options)
+                options.add_argument("--headless")
+                options.add_argument("webdriver.chrome.driver=chromedriver.exe") # seleniun 4.10애서 바뀐 execute path
+                browser = webdriver.Chrome(options=options)  # seleniun 4.10애서 바뀐 execute path
 
                 time.sleep(3)
 
@@ -277,7 +279,7 @@ print("[LOGGED] timelog.txt generated")
 
 
 # 기존 csv에 누적.
-fd2 = open("data/flights.csv", "r", encoding="UTF-8")  # 마지막인덱스
+fd2 = open("data/flights.csv", "r", encoding="UTF-8")  # 마지막인덱스 변경
 csvReader = csv.reader(fd2)
 lastIdx = 0
 for i in csvReader:
