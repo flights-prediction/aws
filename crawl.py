@@ -267,7 +267,7 @@ fd.close()
 print("[INFO]   ", todayFileNameFormatting, ".csv generated")
 
 
-# log 출력..
+# log 출력.
 log_fd = open("timelog.txt", "a", newline="")
 log_fd.write(f"[Start Time] {startTime}\n")
 log_fd.write(f"[End Time] {endTime}\n")
