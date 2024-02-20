@@ -68,7 +68,7 @@ def parsingFromHtml(airway_ID, flightDate, parsedHtml_li):
             )
             """
             li = [
-                -1,  # 항공권 가격 정보 index는 후처리it
+                -1,  # 항공권 가격 정보 index는 후처리i
                 searchingDate,
                 flightDate[0:4] + "-" + flightDate[4:6] + "-" + flightDate[6:8],
                 airway_ID,
