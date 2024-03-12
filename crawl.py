@@ -88,7 +88,7 @@ def parsingFromHtml(airway_ID, flightDate, parsedHtml_li):
     return parsedData_li
 
 
-# airway와 비행날짜 전체의 항공권 데이터를 조사하는 함수
+# airway와 비행날짜 전체의 항공권 데이터를 조사하는 함수.
 def searchWithAirwayAndFlightDate(airway_ID, flightDate):
     global browser
 
