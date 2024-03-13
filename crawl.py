@@ -104,7 +104,7 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
         + flightDate
         + "?adult=1&isDirect=true&fareType=Y"
     )
-    # WebDriver에 Get요청 실패시 예외처리
+    # WebDriver에 Get요청 실패시 예외처리/
     try:
         browser.get(url)
     except:
