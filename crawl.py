@@ -101,7 +101,7 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
         + "-"
         + arriveAirport
         + "-"
-        + flightDate
+        + flightDate 
         + "?adult=1&isDirect=true&fareType=Y"
     )
     # WebDriver에 Get요청 실패시 예외처리/
