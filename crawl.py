@@ -29,7 +29,7 @@ USER_AGENTS = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 14_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Mobile/15E148 Safari/604.1",
     "Mozilla/5.0 (Linux; Android 11; SM-G998U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Mobile Safari/537.36",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 YaBrowser/21.6.2.855 Yowser/2.5 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    # "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
 ]
 
 
@@ -141,11 +141,11 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
 
         time.sleep(3)
     except Exception as e:
-        # webDriver 멈춤으로 인한 timeout
+        # webDriver 멈춤으로 인한 timeout 
         print("[ERROR] 30s timeout at ", departureAirport, arriveAirport, flightDate)
         print(e)
         time.sleep(30)
-        # searchWithAirwayAndFlightDate(airway_ID, flightDate)
+        # searchWithAirwayAndFlightDate(airway_ID, flightDate))
 
     # bs4를 이용한 html parsing
     parsedHtml_li = BeautifulSoup(browser.page_source, "html.parser").find_all(
@@ -195,7 +195,7 @@ def main():
                 options.add_argument("--disable-web-security")
                 options.add_argument("--disable-gpu")
                 options.add_argument("--log-level=1")
-                options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제
+                options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
                 options.add_argument("--headless")
                 options.add_argument("webdriver.chrome.driver=chromedriver.exe") # seleniun 4.10애서 바뀐 execute path
                 browser = webdriver.Chrome(options=options)  # seleniun 4.10애서 바뀐 execute path
