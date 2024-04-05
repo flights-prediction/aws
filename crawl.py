@@ -173,7 +173,7 @@ def main():
         options.add_argument("--disable-gpu")
         options.add_argument("--log-level=1")
         options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         options.add_argument("webdriver.chrome.driver=chromedriver.exe") # seleniun 4.10애서 바뀐 execute path
         browser = webdriver.Chrome(options=options)  # seleniun 4.10애서 바뀐 execute path
         browser.execute_cdp_cmd("Network.enable", {})
@@ -196,7 +196,7 @@ def main():
                 options.add_argument("--disable-gpu")
                 options.add_argument("--log-level=1")
                 options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
-                options.add_argument("--headless")
+                # options.add_argument("--headless")
                 options.add_argument("webdriver.chrome.driver=chromedriver.exe") # seleniun 4.10애서 바뀐 execute path
                 browser = webdriver.Chrome(options=options)  # seleniun 4.10애서 바뀐 execute path
 
