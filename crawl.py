@@ -10,26 +10,26 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import time
 
+import subprocess
 
 # 다낭으로 향하는 2개 노선
 AIRWAYS = [
     ["ICN", "DAD"],
-    ["DAD", "ICN"],
-    # ["PUS", "DAD"],
-    # ["DAD", "PUS"],
+    # ["DAD", "ICN"],
 ]
+USER_AGENT_IDX = 0
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Safari/537.35",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Trident/7.0; AS; rv:11.0) like Gecko",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/91.0.864.37",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) OPR/77.0.4054.203",
     "Mozilla/5.0 (iPhone; CPU iPhone OS 14_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Mobile/15E148 Safari/604.1",
     "Mozilla/5.0 (Linux; Android 11; SM-G998U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Mobile Safari/537.36",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 YaBrowser/21.6.2.855 Yowser/2.5 Safari/537.36",
-    # "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
 ]
 
 
@@ -113,22 +113,7 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
 
     # WebDriver를 이용한 비동기 html 로딩
     try:
-        # 30초 이내 비동기 로딩 실패시 예외처리
-        element = WebDriverWait(browser, 30).until(
-            EC.presence_of_element_located(
-                (
-                    By.CLASS_NAME,
-                    "flights.List.international_InternationalContainer__2sPtn",
-                )
-            )
-        )
-        time.sleep(1)
-        # 30초 이내 로딩완료 실패시 예외처리
-        element_to_disappear = WebDriverWait(browser, 30).until(
-            EC.invisibility_of_element_located(
-                (By.CLASS_NAME, "loadingProgress_loadingProgress__1LRJo")
-            )
-        )
+        time.sleep(25)
 
         # 카드혜택 필터 제거.
         cardFilterElems = browser.find_elements(By.CLASS_NAME, "header_current__3asvR")
@@ -142,10 +127,32 @@ def searchWithAirwayAndFlightDate(airway_ID, flightDate):
         time.sleep(3)
     except Exception as e:
         # webDriver 멈춤으로 인한 timeout 
-        print("[ERROR] 30s timeout at ", departureAirport, arriveAirport, flightDate)
+        print("[ERROR] 40s timeout at ", departureAirport, arriveAirport, flightDate)
         print(e)
-        time.sleep(30)
+        time.sleep(20)
+        
+        return [[
+                -1,  # 항공권 가격 정보 index는 후처리i
+                searchingDate,
+                flightDate[0:4] + "-" + flightDate[4:6] + "-" + flightDate[6:8],
+                -1,
+                -1,
+                -1,
+                -1,  # 소요시간 슬라이싱
+                -1,
+                -1,
+            ]]
         # searchWithAirwayAndFlightDate(airway_ID, flightDate))
+        
+        # ### 종료
+        # # csv 생성
+        # fd = open(f"data/{todayFileNameFormatting}.csv", "w", encoding="utf-8", newline="")
+        # csvWriter = csv.writer(fd)
+        # for li in datas_li:
+        #     csvWriter.writerow(li)
+        # fd.close()
+        # print("[INFO]   ", todayFileNameFormatting, ".csv generated")
+        # ###
 
     # bs4를 이용한 html parsing
     parsedHtml_li = BeautifulSoup(browser.page_source, "html.parser").find_all(
@@ -165,15 +172,15 @@ def main():
     datas_li = []
 
     # 노선의 ID
-    for airway_ID in range(2):
+    for airway_ID in range(1):
         options = webdriver.ChromeOptions()
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("user-agent=" + USER_AGENTS[0])
         options.add_argument("--disable-web-security")
         options.add_argument("--disable-gpu")
-        options.add_argument("--log-level=1")
+        # options.add_argument("--log-level=1")
         options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         options.add_argument("webdriver.chrome.driver=chromedriver.exe") # seleniun 4.10애서 바뀐 execute path
         browser = webdriver.Chrome(options=options)  # seleniun 4.10애서 바뀐 execute path
         browser.execute_cdp_cmd("Network.enable", {})
@@ -183,31 +190,31 @@ def main():
         )
         time.sleep(3)  # 브라우저 열고 잠깐 기다림
 
-        for days in range(3, 181):  # 3일뒤 항공편부터 존재(해외) 6개월까지
-            if days % 19 == 0:
-                print("WebDriver Reload..")
-                browser.quit()
-                time.sleep(3)
+        for days in range(3, 60):  # 3일뒤 항공편부터 존재(해외) 6개월까지
+            # if days % 19 == 0:
+            #     print("WebDriver Reload..")
+            #     browser.quit()
+            #     time.sleep(3)
 
-                options = webdriver.ChromeOptions()
-                options.add_argument("--disable-blink-features=AutomationControlled")
-                options.add_argument("user-agent=" + USER_AGENTS[int(days // 19)])
-                options.add_argument("--disable-web-security")
-                options.add_argument("--disable-gpu")
-                options.add_argument("--log-level=1")
-                options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
-                options.add_argument("--headless")
-                options.add_argument("webdriver.chrome.driver=chromedriver.exe") # seleniun 4.10애서 바뀐 execute path
-                browser = webdriver.Chrome(options=options)  # seleniun 4.10애서 바뀐 execute path
+            #     options = webdriver.ChromeOptions()
+            #     options.add_argument("--disable-blink-features=AutomationControlled")
+            #     options.add_argument("user-agent=" + USER_AGENTS[int(days // 19)])
+            #     options.add_argument("--disable-web-security")
+            #     options.add_argument("--disable-gpu")
+            #     # options.add_argument("--log-level=1")
+            #     options.add_argument("--blink-setting=imagesEnable=false")  # 이미지로딩 제거
+            #     # options.add_argument("--headless")
+            #     options.add_argument("webdriver.chrome.driver=chromedriver.exe") # seleniun 4.10애서 바뀐 execute path
+            #     browser = webdriver.Chrome(options=options)  # seleniun 4.10애서 바뀐 execute path
 
-                time.sleep(3)
+            #     time.sleep(3)
 
-                browser.execute_cdp_cmd("Network.enable", {})
-                browser.execute_cdp_cmd(
-                    "Network.setExtraHTTPHeaders",
-                    {"headers": {"User-Agent": USER_AGENTS[int(days // 19)]}},
-                )
-                time.sleep(2)
+            #     browser.execute_cdp_cmd("Network.enable", {})
+            #     browser.execute_cdp_cmd(
+            #         "Network.setExtraHTTPHeaders",
+            #         {"headers": {"User-Agent": USER_AGENTS[int(days // 19)]}},
+            #     )+25
+            #     time.sleep(2)
 
             departureAirPort = AIRWAYS[airway_ID][0]
             arriveAirPort = AIRWAYS[airway_ID][1]
@@ -232,6 +239,13 @@ def main():
         print("----------------changing airway----------------------\n")
         # 브라우저 리셋 - 끄기
         browser.quit()
+        
+    
+    length = len(datas_li) - 1
+    while length >= 0:
+        if datas_li[length][3] == -1:
+            del datas_li[length]
+        length -= 1
 
     # Flight Ticket ID,  후처리
     for i in range(len(datas_li)):
@@ -296,3 +310,5 @@ for li in datas_li:
     csvWriter.writerow(li)
 fd3.close()
 print("[UPDATE] flights.csv updated")
+
+subprocess.run(["python", "crawl2.py"])

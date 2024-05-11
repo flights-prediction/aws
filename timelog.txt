@@ -393,3 +393,428 @@
 [Running Time] : 2:08:25.395359 (ms)
 [File Length] 2 airways, 6111 rows 
 
+[Start Time] 2024-04-25 16:11:10.851364
+[End Time] 2024-04-25 16:35:01.834266
+[Running Time] : 0:23:50.982902 (ms)
+[File Length] 2 airways, 1050 rows 
+
+[Start Time] 2024-04-25 16:35:32.002697
+[End Time] 2024-04-25 17:05:26.719542
+[Running Time] : 0:29:54.716845 (ms)
+[File Length] 2 airways, 1236 rows 
+
+[Start Time] 2024-04-25 17:18:11.459532
+[End Time] 2024-04-25 17:53:10.692421
+[Running Time] : 0:34:59.232889 (ms)
+[File Length] 2 airways, 1391 rows 
+
+[Start Time] 2024-04-26 19:48:46.474825
+[End Time] 2024-04-26 20:20:56.812223
+[Running Time] : 0:32:10.337398 (ms)
+[File Length] 2 airways, 915 rows 
+
+[Start Time] 2024-04-26 20:25:14.764439
+[End Time] 2024-04-26 21:00:20.308133
+[Running Time] : 0:35:05.543694 (ms)
+[File Length] 2 airways, 864 rows 
+
+[Start Time] 2024-04-26 21:55:29.862025
+[End Time] 2024-04-26 22:26:09.486906
+[Running Time] : 0:30:39.624881 (ms)
+[File Length] 2 airways, 1217 rows 
+
+[Start Time] 2024-04-27 00:08:18.866619
+[End Time] 2024-04-27 00:36:55.861718
+[Running Time] : 0:28:36.995099 (ms)
+[File Length] 2 airways, 1173 rows 
+
+[Start Time] 2024-04-27 00:39:39.846615
+[End Time] 2024-04-27 01:09:51.463527
+[Running Time] : 0:30:11.616912 (ms)
+[File Length] 2 airways, 1224 rows 
+
+[Start Time] 2024-04-27 02:58:30.518449
+[End Time] 2024-04-27 03:29:36.821449
+[Running Time] : 0:31:06.303000 (ms)
+[File Length] 2 airways, 1131 rows 
+
+[Start Time] 2024-04-28 08:44:54.264025
+[End Time] 2024-04-28 09:14:53.485539
+[Running Time] : 0:29:59.221514 (ms)
+[File Length] 2 airways, 981 rows 
+
+[Start Time] 2024-04-28 18:23:03.430412
+[End Time] 2024-04-28 18:56:07.557442
+[Running Time] : 0:33:04.127030 (ms)
+[File Length] 2 airways, 1008 rows 
+
+[Start Time] 2024-04-28 18:56:48.622112
+[End Time] 2024-04-28 19:28:31.891398
+[Running Time] : 0:31:43.269286 (ms)
+[File Length] 2 airways, 1105 rows 
+
+[Start Time] 2024-04-28 19:54:12.089514
+[End Time] 2024-04-28 20:23:56.447653
+[Running Time] : 0:29:44.358139 (ms)
+[File Length] 2 airways, 1311 rows 
+
+[Start Time] 2024-04-28 20:33:02.902074
+[End Time] 2024-04-28 21:39:36.238727
+[Running Time] : 1:06:33.336653 (ms)
+[File Length] 2 airways, 1768 rows 
+
+[Start Time] 2024-04-29 00:10:16.724312
+[End Time] 2024-04-29 00:39:13.258595
+[Running Time] : 0:28:56.534283 (ms)
+[File Length] 2 airways, 1234 rows 
+
+[Start Time] 2024-04-29 01:05:50.137220
+[End Time] 2024-04-29 01:35:55.153236
+[Running Time] : 0:30:05.016016 (ms)
+[File Length] 2 airways, 1278 rows 
+
+[Start Time] 2024-04-29 01:36:13.875539
+[End Time] 2024-04-29 02:06:12.985358
+[Running Time] : 0:29:59.109819 (ms)
+[File Length] 2 airways, 1276 rows 
+
+[Start Time] 2024-04-30 00:16:36.845447
+[End Time] 2024-04-30 00:45:01.200494
+[Running Time] : 0:28:24.355047 (ms)
+[File Length] 2 airways, 1201 rows 
+
+[Start Time] 2024-04-30 00:45:02.925537
+[End Time] 2024-04-30 01:15:00.345489
+[Running Time] : 0:29:57.419952 (ms)
+[File Length] 2 airways, 1218 rows 
+
+[Start Time] 2024-04-30 01:15:01.529687
+[End Time] 2024-04-30 01:45:00.714791
+[Running Time] : 0:29:59.185104 (ms)
+[File Length] 2 airways, 1751 rows 
+
+[Start Time] 2024-04-30 01:45:02.578068
+[End Time] 2024-04-30 02:14:57.508072
+[Running Time] : 0:29:54.930004 (ms)
+[File Length] 2 airways, 1329 rows 
+
+[Start Time] 2024-04-30 02:16:40.493710
+[End Time] 2024-04-30 02:48:35.863441
+[Running Time] : 0:31:55.369731 (ms)
+[File Length] 2 airways, 1061 rows 
+
+[Start Time] 2024-04-30 19:54:57.540433
+[End Time] 2024-04-30 20:24:22.279104
+[Running Time] : 0:29:24.738671 (ms)
+[File Length] 2 airways, 1063 rows 
+
+[Start Time] 2024-04-30 20:24:23.244124
+[End Time] 2024-04-30 20:55:17.636042
+[Running Time] : 0:30:54.391918 (ms)
+[File Length] 2 airways, 1211 rows 
+
+[Start Time] 2024-04-30 20:55:18.690576
+[End Time] 2024-04-30 21:24:52.638834
+[Running Time] : 0:29:33.948258 (ms)
+[File Length] 2 airways, 1309 rows 
+
+[Start Time] 2024-05-01 03:45:03.107600
+[End Time] 2024-05-01 04:17:44.989856
+[Running Time] : 0:32:41.882256 (ms)
+[File Length] 2 airways, 1023 rows 
+
+[Start Time] 2024-05-01 04:56:07.300073
+[End Time] 2024-05-01 05:25:27.902363
+[Running Time] : 0:29:20.602290 (ms)
+[File Length] 2 airways, 1055 rows 
+
+[Start Time] 2024-05-01 05:25:28.944526
+[End Time] 2024-05-01 05:56:47.952187
+[Running Time] : 0:31:19.007661 (ms)
+[File Length] 2 airways, 1309 rows 
+
+[Start Time] 2024-05-01 05:56:48.991475
+[End Time] 2024-05-01 06:28:55.251136
+[Running Time] : 0:32:06.259661 (ms)
+[File Length] 2 airways, 1053 rows 
+
+[Start Time] 2024-05-01 06:28:56.261208
+[End Time] 2024-05-01 06:58:15.527113
+[Running Time] : 0:29:19.265905 (ms)
+[File Length] 2 airways, 1032 rows 
+
+[Start Time] 2024-05-01 06:58:16.532472
+[End Time] 2024-05-01 07:30:07.649997
+[Running Time] : 0:31:51.117525 (ms)
+[File Length] 2 airways, 1036 rows 
+
+[Start Time] 2024-05-02 01:13:39.397864
+[End Time] 2024-05-02 01:41:55.525970
+[Running Time] : 0:28:16.128106 (ms)
+[File Length] 2 airways, 1256 rows 
+
+[Start Time] 2024-05-02 01:41:57.831032
+[End Time] 2024-05-02 02:11:53.782208
+[Running Time] : 0:29:55.951176 (ms)
+[File Length] 2 airways, 1235 rows 
+
+[Start Time] 2024-05-02 02:11:54.892796
+[End Time] 2024-05-02 02:41:25.061878
+[Running Time] : 0:29:30.169082 (ms)
+[File Length] 2 airways, 1181 rows 
+
+[Start Time] 2024-05-02 02:41:26.304949
+[End Time] 2024-05-02 03:09:30.021078
+[Running Time] : 0:28:03.716129 (ms)
+[File Length] 2 airways, 1162 rows 
+
+[Start Time] 2024-05-02 03:09:31.140633
+[End Time] 2024-05-02 03:39:07.392110
+[Running Time] : 0:29:36.251477 (ms)
+[File Length] 2 airways, 1278 rows 
+
+[Start Time] 2024-05-02 03:39:08.601564
+[End Time] 2024-05-02 04:08:40.871176
+[Running Time] : 0:29:32.269612 (ms)
+[File Length] 2 airways, 1260 rows 
+
+[Start Time] 2024-05-03 00:33:50.902639
+[End Time] 2024-05-03 01:04:14.431637
+[Running Time] : 0:30:23.528998 (ms)
+[File Length] 2 airways, 1053 rows 
+
+[Start Time] 2024-05-03 01:04:15.528425
+[End Time] 2024-05-03 01:40:20.827955
+[Running Time] : 0:36:05.299530 (ms)
+[File Length] 2 airways, 720 rows 
+
+[Start Time] 2024-05-03 01:40:22.132686
+[End Time] 2024-05-03 02:13:48.900497
+[Running Time] : 0:33:26.767811 (ms)
+[File Length] 2 airways, 951 rows 
+
+[Start Time] 2024-05-03 02:13:50.210885
+[End Time] 2024-05-03 02:44:14.183824
+[Running Time] : 0:30:23.972939 (ms)
+[File Length] 2 airways, 986 rows 
+
+[Start Time] 2024-05-03 02:44:15.358286
+[End Time] 2024-05-03 03:17:58.068430
+[Running Time] : 0:33:42.710144 (ms)
+[File Length] 2 airways, 949 rows 
+
+[Start Time] 2024-05-03 03:17:59.120892
+[End Time] 2024-05-03 03:49:19.728390
+[Running Time] : 0:31:20.607498 (ms)
+[File Length] 2 airways, 1137 rows 
+
+[Start Time] 2024-05-04 03:45:10.812780
+[End Time] 2024-05-04 04:15:30.667418
+[Running Time] : 0:30:19.854638 (ms)
+[File Length] 2 airways, 1021 rows 
+
+[Start Time] 2024-05-04 04:15:31.842670
+[End Time] 2024-05-04 04:48:37.514479
+[Running Time] : 0:33:05.671809 (ms)
+[File Length] 2 airways, 1000 rows 
+
+[Start Time] 2024-05-04 04:48:38.616210
+[End Time] 2024-05-04 05:19:52.571909
+[Running Time] : 0:31:13.955699 (ms)
+[File Length] 2 airways, 1134 rows 
+
+[Start Time] 2024-05-04 05:19:53.607129
+[End Time] 2024-05-04 05:50:41.729450
+[Running Time] : 0:30:48.122321 (ms)
+[File Length] 2 airways, 904 rows 
+
+[Start Time] 2024-05-04 05:50:42.829716
+[End Time] 2024-05-04 06:23:47.019253
+[Running Time] : 0:33:04.189537 (ms)
+[File Length] 2 airways, 989 rows 
+
+[Start Time] 2024-05-04 06:23:48.182863
+[End Time] 2024-05-04 06:56:04.220116
+[Running Time] : 0:32:16.037253 (ms)
+[File Length] 2 airways, 1055 rows 
+
+[Start Time] 2024-05-05 19:45:49.668983
+[End Time] 2024-05-05 20:14:22.413436
+[Running Time] : 0:28:32.744453 (ms)
+[File Length] 2 airways, 1237 rows 
+
+[Start Time] 2024-05-05 20:14:24.298060
+[End Time] 2024-05-05 20:44:16.598208
+[Running Time] : 0:29:52.300148 (ms)
+[File Length] 2 airways, 1254 rows 
+
+[Start Time] 2024-05-05 20:44:18.500535
+[End Time] 2024-05-05 21:14:14.588077
+[Running Time] : 0:29:56.087542 (ms)
+[File Length] 2 airways, 1218 rows 
+
+[Start Time] 2024-05-05 21:14:16.383523
+[End Time] 2024-05-05 21:42:31.231062
+[Running Time] : 0:28:14.847539 (ms)
+[File Length] 2 airways, 1200 rows 
+
+[Start Time] 2024-05-05 21:42:32.355043
+[End Time] 2024-05-05 22:12:09.935102
+[Running Time] : 0:29:37.580059 (ms)
+[File Length] 2 airways, 1332 rows 
+
+[Start Time] 2024-05-05 22:12:11.037369
+[End Time] 2024-05-05 22:41:47.754785
+[Running Time] : 0:29:36.717416 (ms)
+[File Length] 2 airways, 1246 rows 
+
+[Start Time] 2024-05-06 05:09:07.660887
+[End Time] 2024-05-06 05:37:44.649305
+[Running Time] : 0:28:36.988418 (ms)
+[File Length] 2 airways, 1147 rows 
+
+[Start Time] 2024-05-06 05:37:45.644254
+[End Time] 2024-05-06 06:09:52.811653
+[Running Time] : 0:32:07.167399 (ms)
+[File Length] 2 airways, 1091 rows 
+
+[Start Time] 2024-05-06 06:09:53.876609
+[End Time] 2024-05-06 06:42:17.692241
+[Running Time] : 0:32:23.815632 (ms)
+[File Length] 2 airways, 984 rows 
+
+[Start Time] 2024-05-06 06:42:18.795051
+[End Time] 2024-05-06 07:13:13.432210
+[Running Time] : 0:30:54.637159 (ms)
+[File Length] 2 airways, 922 rows 
+
+[Start Time] 2024-05-06 07:13:14.498695
+[End Time] 2024-05-06 07:45:21.592639
+[Running Time] : 0:32:07.093944 (ms)
+[File Length] 2 airways, 1009 rows 
+
+[Start Time] 2024-05-06 07:45:22.726024
+[End Time] 2024-05-06 08:18:01.341193
+[Running Time] : 0:32:38.615169 (ms)
+[File Length] 2 airways, 941 rows 
+
+[Start Time] 2024-05-07 02:18:23.026163
+[End Time] 2024-05-07 02:48:07.169611
+[Running Time] : 0:29:44.143448 (ms)
+[File Length] 2 airways, 1086 rows 
+
+[Start Time] 2024-05-07 02:48:08.030983
+[End Time] 2024-05-07 03:20:38.571952
+[Running Time] : 0:32:30.540969 (ms)
+[File Length] 2 airways, 1000 rows 
+
+[Start Time] 2024-05-07 03:20:39.354084
+[End Time] 2024-05-07 03:53:56.759008
+[Running Time] : 0:33:17.404924 (ms)
+[File Length] 2 airways, 937 rows 
+
+[Start Time] 2024-05-07 03:53:57.624829
+[End Time] 2024-05-07 04:22:06.691501
+[Running Time] : 0:28:09.066672 (ms)
+[File Length] 2 airways, 1177 rows 
+
+[Start Time] 2024-05-07 04:22:07.537595
+[End Time] 2024-05-07 04:54:07.029960
+[Running Time] : 0:31:59.492365 (ms)
+[File Length] 2 airways, 1083 rows 
+
+[Start Time] 2024-05-07 04:54:07.876824
+[End Time] 2024-05-07 05:27:40.327250
+[Running Time] : 0:33:32.450426 (ms)
+[File Length] 2 airways, 972 rows 
+
+[Start Time] 2024-05-08 06:16:19.680238
+[End Time] 2024-05-08 06:44:30.256970
+[Running Time] : 0:28:10.576732 (ms)
+[File Length] 2 airways, 1213 rows 
+
+[Start Time] 2024-05-08 06:44:31.084667
+[End Time] 2024-05-08 07:17:50.309421
+[Running Time] : 0:33:19.224754 (ms)
+[File Length] 2 airways, 995 rows 
+
+[Start Time] 2024-05-08 07:17:51.275899
+[End Time] 2024-05-08 07:58:29.848676
+[Running Time] : 0:40:38.572777 (ms)
+[File Length] 2 airways, 318 rows 
+
+[Start Time] 2024-05-08 07:58:30.730056
+[End Time] 2024-05-08 08:27:26.858956
+[Running Time] : 0:28:56.128900 (ms)
+[File Length] 2 airways, 1080 rows 
+
+[Start Time] 2024-05-08 08:27:27.728865
+[End Time] 2024-05-08 09:00:30.722090
+[Running Time] : 0:33:02.993225 (ms)
+[File Length] 2 airways, 989 rows 
+
+[Start Time] 2024-05-08 09:00:31.572643
+[End Time] 2024-05-08 09:36:28.185900
+[Running Time] : 0:35:56.613257 (ms)
+[File Length] 2 airways, 713 rows 
+
+[Start Time] 2024-05-09 05:31:49.199955
+[End Time] 2024-05-09 06:01:42.773437
+[Running Time] : 0:29:53.573482 (ms)
+[File Length] 2 airways, 1090 rows 
+
+[Start Time] 2024-05-09 06:01:43.641496
+[End Time] 2024-05-09 06:34:53.461571
+[Running Time] : 0:33:09.820075 (ms)
+[File Length] 2 airways, 945 rows 
+
+[Start Time] 2024-05-09 06:34:54.332010
+[End Time] 2024-05-09 07:07:16.649820
+[Running Time] : 0:32:22.317810 (ms)
+[File Length] 2 airways, 945 rows 
+
+[Start Time] 2024-05-09 07:07:17.553819
+[End Time] 2024-05-09 07:37:55.087950
+[Running Time] : 0:30:37.534131 (ms)
+[File Length] 2 airways, 970 rows 
+
+[Start Time] 2024-05-09 07:37:55.964608
+[End Time] 2024-05-09 08:07:54.581189
+[Running Time] : 0:29:58.616581 (ms)
+[File Length] 2 airways, 1188 rows 
+
+[Start Time] 2024-05-09 08:07:55.481760
+[End Time] 2024-05-09 08:37:23.997649
+[Running Time] : 0:29:28.515889 (ms)
+[File Length] 2 airways, 1107 rows 
+
+[Start Time] 2024-05-11 04:42:56.700339
+[End Time] 2024-05-11 05:12:38.704767
+[Running Time] : 0:29:42.004428 (ms)
+[File Length] 2 airways, 1254 rows 
+
+[Start Time] 2024-05-11 05:12:39.515992
+[End Time] 2024-05-11 05:45:47.943398
+[Running Time] : 0:33:08.427406 (ms)
+[File Length] 2 airways, 935 rows 
+
+[Start Time] 2024-05-11 05:45:48.768663
+[End Time] 2024-05-11 06:21:20.359761
+[Running Time] : 0:35:31.591098 (ms)
+[File Length] 2 airways, 718 rows 
+
+[Start Time] 2024-05-11 06:21:21.181050
+[End Time] 2024-05-11 06:52:14.065912
+[Running Time] : 0:30:52.884862 (ms)
+[File Length] 2 airways, 981 rows 
+
+[Start Time] 2024-05-11 06:52:14.851134
+[End Time] 2024-05-11 07:28:02.174974
+[Running Time] : 0:35:47.323840 (ms)
+[File Length] 2 airways, 760 rows 
+
+[Start Time] 2024-05-11 07:28:02.995809
+[End Time] 2024-05-11 08:00:39.159145
+[Running Time] : 0:32:36.163336 (ms)
+[File Length] 2 airways, 1008 rows 
+
